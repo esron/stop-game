@@ -28,10 +28,14 @@ describe('AppController (e2e)', () => {
       .expect({
         statusCode: 400,
         message: [
+          'rounds should not be empty',
           'rounds must be a number conforming to the specified constraints',
+          'maxPlayers should not be empty',
           'maxPlayers must be a number conforming to the specified constraints',
           'password must contain only letters and numbers',
+          'categories should not be empty',
           'categories must be an array',
+          'letters should not be empty',
           'letters must be an array',
         ],
         error: 'Bad Request',
