@@ -29,14 +29,41 @@ describe('AppController (e2e)', () => {
         statusCode: 400,
         message: [
           'rounds should not be empty',
-          'rounds must be a number conforming to the specified constraints',
+          'rounds must not be greater than 12',
+          'rounds must not be less than 1',
+          'rounds must be an integer number',
           'maxPlayers should not be empty',
-          'maxPlayers must be a number conforming to the specified constraints',
+          'maxPlayers must not be greater than 12',
+          'maxPlayers must not be less than 1',
+          'maxPlayers must be an integer number',
           'password must contain only letters and numbers',
           'categories should not be empty',
           'categories must be an array',
+          'the size of letters must be equal to rounds',
+          'each value in letters must match /[A-Z]/gm regular expression',
           'letters should not be empty',
           'letters must be an array',
+        ],
+        error: 'Bad Request',
+      });
+  });
+
+  it('/rooms (POST) should validate letters', () => {
+    return request(app.getHttpServer())
+      .post('/rooms')
+      .send({
+        rounds: 3,
+        maxPlayers: 5,
+        password: 'blabla15',
+        categories: ['cars', 'names', 'actors'],
+        letters: ['not valiD', 'C', 'Z', 'A'],
+      })
+      .expect(400)
+      .expect({
+        statusCode: 400,
+        message: [
+          'the size of letters must be equal to rounds',
+          'each value in letters must match /[A-Z]/gm regular expression',
         ],
         error: 'Bad Request',
       });
