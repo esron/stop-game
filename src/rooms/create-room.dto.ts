@@ -1,11 +1,24 @@
-import { IsAlphanumeric, IsArray, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsAlphanumeric,
+  IsArray,
+  IsInt,
+  IsNotEmpty,
+  Matches,
+  Max,
+  Min,
+} from 'class-validator';
+import { ArraySizeEquals } from './validators/array-size-equals';
 
 export class CreateRoomDTO {
-  @IsNumber()
+  @IsInt()
+  @Min(1)
+  @Max(12)
   @IsNotEmpty()
   rounds: number;
 
-  @IsNumber()
+  @IsInt()
+  @Min(1)
+  @Max(12)
   @IsNotEmpty()
   maxPlayers: number;
 
@@ -18,5 +31,9 @@ export class CreateRoomDTO {
 
   @IsArray()
   @IsNotEmpty()
-  letters: string;
+  @Matches(/[A-Z]/gm, { each: true })
+  @ArraySizeEquals('rounds', {
+    message: 'the size of letters must be equal to rounds',
+  })
+  letters: Array<string>;
 }
