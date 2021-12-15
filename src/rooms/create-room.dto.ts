@@ -3,9 +3,10 @@ import {
   IsArray,
   IsInt,
   IsNotEmpty,
-  Matches,
   Max,
+  MaxLength,
   Min,
+  MinLength,
 } from 'class-validator';
 import { ArraySizeEquals } from './validators/array-size-equals';
 import { IsSingleWord } from './validators/is-single-word';
@@ -33,7 +34,8 @@ export class CreateRoomDTO {
 
   @IsArray()
   @IsNotEmpty()
-  @Matches(/[A-Z]/gm, { each: true })
+  @MinLength(1, { each: true })
+  @MaxLength(1, { each: true })
   @ArraySizeEquals('rounds', {
     message: 'the size of letters must be equal to rounds',
   })

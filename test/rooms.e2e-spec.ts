@@ -41,7 +41,8 @@ describe('AppController (e2e)', () => {
           'categories should not be empty',
           'categories must be an array',
           'the size of letters must be equal to rounds',
-          'each value in letters must match /[A-Z]/gm regular expression',
+          'each value in letters must be shorter than or equal to 1 characters',
+          'each value in letters must be longer than or equal to 1 characters',
           'letters should not be empty',
           'letters must be an array',
         ],
@@ -64,7 +65,7 @@ describe('AppController (e2e)', () => {
         statusCode: 400,
         message: [
           'the size of letters must be equal to rounds',
-          'each value in letters must match /[A-Z]/gm regular expression',
+          'each value in letters must be shorter than or equal to 1 characters',
         ],
         error: 'Bad Request',
       });
