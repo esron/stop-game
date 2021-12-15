@@ -37,6 +37,7 @@ describe('AppController (e2e)', () => {
           'maxPlayers must not be less than 1',
           'maxPlayers must be an integer number',
           'password must contain only letters and numbers',
+          'each category must be a single word',
           'categories should not be empty',
           'categories must be an array',
           'the size of letters must be equal to rounds',
