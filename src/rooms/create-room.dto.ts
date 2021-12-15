@@ -8,6 +8,7 @@ import {
   Min,
 } from 'class-validator';
 import { ArraySizeEquals } from './validators/array-size-equals';
+import { IsSingleWord } from './validators/is-single-word';
 
 export class CreateRoomDTO {
   @IsInt()
@@ -27,6 +28,7 @@ export class CreateRoomDTO {
 
   @IsArray()
   @IsNotEmpty()
+  @IsSingleWord({ each: true, message: 'each category must be a single word' })
   categories: string;
 
   @IsArray()
